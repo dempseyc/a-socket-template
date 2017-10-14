@@ -4,7 +4,7 @@ I only use express and socket.io. This template is more basic than a typical cha
 
 ## Getting Started
 
-Fork it. I will gitignore node-modules but haven't yet. If you don't have the modules, run `npm install` .
+Fork it. Run `npm install` .
 
 ### hat tip to all o yall! stripped down tutorials from the docs. wanted to present something even a little simpler which still demonstrates the technology, and forms a strong foundation to build upon.
 
