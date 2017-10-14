@@ -18,11 +18,11 @@ $(function() {
   $uiTargets.append(target);
 
   var socket = io();
-
   console.log(socket);
 
   let myClientIndex;
 
+  // the socket.on() functions are receiving calls from the server
   socket.on('connection', function (clientIndex) {
     myClientIndex = clientIndex;
     console.log('you are connected, client ',clientIndex);
@@ -32,10 +32,14 @@ $(function() {
     $dataDisplay.html(data);
   });
 
+
   socket.on('disconnect', function () {
+    // socket.emit is calling functions on the server from the client side
     socket.emit('disconnect');
   });
 
+  // updateData is called when a client interacts with the UI target
+  // data is shared with all clients through the server
   function updateData (data) {
     socket.emit('client action', data);
   }

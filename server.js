@@ -4,6 +4,7 @@ const path = require('path');
 const server = require('http').createServer(app);
 const port = process.env.PORT || 3000;
 
+//io automatically updates an io.sockets object, btw
 const io = require('socket.io')(server);
 
 server.listen(port, function () {
@@ -14,14 +15,14 @@ server.listen(port, function () {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // config
-// put middlewares here
+// add middlewares here
 app.set('view engine','html');
-
 
 // a place for server data
 let clients = [];
 let data = {numClients: 0, shared: "some data"};
 
+// io is opening a closure where client side functions calls can be received
 io.on('connection', function (socket) {
 
   clients.push(socket);
@@ -29,6 +30,7 @@ io.on('connection', function (socket) {
   console.log(`client socket connected numClients = ${data.numClients}`);
   socket.emit('connection', data.numClients);
 
+  // in the server here, socket.on() functions are recieving calls from the clients
   socket.on('disconnect', function () {
     let clientIndex = clients.indexOf(socket);
     clients.splice(clientIndex, 1);
@@ -37,6 +39,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('client action', function (data) {
+    // io.sockets.emit is calling functions on the client side
     io.sockets.emit('new data', data);
   })
 });
