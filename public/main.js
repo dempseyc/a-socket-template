@@ -13,7 +13,7 @@ target.submit(function( event ) {
 });
 
 $body.add(target);
-$uiTargets.append(target);
+$uiTarget.append(target);
 
 var socket = io();
 console.log(socket);
