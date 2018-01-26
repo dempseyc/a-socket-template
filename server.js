@@ -22,7 +22,7 @@ app.set('view engine','html');
 let clients = [];
 let data = {numClients: 0, shared: "some data"};
 
-// io is opening a closure where client side functions calls can be received
+// io is opening a context where client side functions calls can be received
 io.on('connection', function (socket) {
 
   clients.push(socket);
